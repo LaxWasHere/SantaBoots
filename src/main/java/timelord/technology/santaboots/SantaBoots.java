@@ -20,6 +20,7 @@ public class SantaBoots extends JavaPlugin implements Listener {
     PluginDescriptionFile pdf;
 
     public void onEnable() {
+        saveDefaultConfig();
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " [disable]");
         getCommand("nofall").setExecutor(new NorthPoleCommand(this));
@@ -34,7 +35,10 @@ public class SantaBoots extends JavaPlugin implements Listener {
     @EventHandler
     public void onFall(EntityDamageEvent ev) {
         if (ev.getCause() == EntityDamageEvent.DamageCause.FALL && ev.getEntity() instanceof Player) {
-            if (reindeers.contains(((Player) ev.getEntity()).getPlayer().getUniqueId())) ev.setCancelled(true);
+            Player p = (Player) ev.getEntity();
+            if (reindeers.contains(p.getUniqueId())) {
+                ev.setCancelled(true);
+            }
         }
     }
 

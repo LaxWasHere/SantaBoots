@@ -21,6 +21,7 @@ public class NorthPoleCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (!sender.hasPermission("surprise.me")) {
             sender.sendMessage(ChatColor.RED + "You are on the naughty list!");
+            return false;
         }
         Player p = (Player) sender;
         if (santaBoots.reindeers.contains(p.getUniqueId())) {
